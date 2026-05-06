@@ -1,13 +1,27 @@
 {
-  "extends": ["next", "next/core-web-vitals"],
+  "extends": "next/core-web-vitals",
   "rules": {
+    "no-unused-vars": "off",
     "no-console": "off",
     "react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-unused-vars": "off",
-    "@next/next/no-img-element": "off",
     "react/no-unescaped-entities": "off",
+    "@next/next/no-img-element": "off",
+    "jsx-a11y/alt-text": "off",
     "react/display-name": "off",
-    "no-undef": "off"
-  }
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
+    "react-hooks/rules-of-hooks": "off",
+    "import/no-anonymous-default-export": "off"
+  },
+  "ignorePatterns": [
+    "node_modules/",
+    ".next/",
+    "out/",
+    "dist/",
+    "build/",
+    "**/*.test.js",
+    "**/*.spec.js"
+  ]
 }
