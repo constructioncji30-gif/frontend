@@ -41,6 +41,7 @@ export default function WorkerRoomView() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [roomSearchTerm, setRoomSearchTerm] = useState<string>("");
   const [medicalSearch, setMedicalSearch] = useState<string>("");
+    const [PASSWORD, setPASSWORD] = useState<any>("");
 
   // Tab state
   const [activeTab, setActiveTab] = useState<
@@ -603,7 +604,16 @@ setLoading(true);    } catch (err) {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-
+ <div className="flex flex-col">
+          <label className="block text-sm font-medium mb-1">PASSWORD</label>
+          <input
+            type="text"
+            placeholder="ENTER PASSWORD TO SEE"
+            className="border px-3 py-2 rounded-full w-64 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={PASSWORD}
+            onChange={(e) => setPASSWORD(e.target.value)}
+          />
+        </div>
         {/* Search by Room */}
         <div className="flex flex-col">
           <label className="block text-sm font-medium mb-1">Search by Room</label>
@@ -860,7 +870,7 @@ setLoading(true);    } catch (err) {
                             </div>
                           </td>
                           <td className="border px-2 py-1 text-green-500">
-                            {/* {worker.iqamaNumber} */}<EyeClosed size={10}/>
+                            {PASSWORD==2344?worker.iqamaNumber :<EyeClosed size={10}/>} 
                           </td>
                           <td className="border px-2 py-1">
                             {worker.position?.toUpperCase()}
@@ -921,15 +931,15 @@ setLoading(true);    } catch (err) {
                                   />
                                   <button
                                     className="bg-green-500 text-white px-2 py-[1px] rounded-full hover:bg-green-600 text-xs"
-                                    onClick={() =>
-                                      reactivateWorker(worker.id, room)
-                                    }
+                                    // onClick={() =>
+                                    //   reactivateWorker(worker.id, room)
+                                    // }
                                   >
                                     Reactivate
                                   </button>
                                   <button
                                     className="bg-red-500 text-white px-2 py-[1px] rounded-full hover:bg-red-600"
-                                    onClick={() => deleteWorker(worker.id, room)}
+                                    // onClick={() => deleteWorker(worker.id, room)}
                                   >
                                     <Trash2 size={14} />
                                   </button>
@@ -943,13 +953,13 @@ setLoading(true);    } catch (err) {
                                   />
                                   <button
                                     className="bg-orange-500 text-white px-2 py-[1px] rounded-full hover:bg-orange-600 text-xs"
-                                    onClick={() => markAsLeft(worker.id, room)}
+                                    // onClick={() => markAsLeft(worker.id, room)}
                                   >
                                     Mark as Left
                                   </button>
                                   <button
                                     className="bg-red-500 text-white px-2 py-[1px] rounded-full hover:bg-red-600"
-                                    onClick={() => deleteWorker(worker.id, room)}
+                                    // onClick={() => deleteWorker(worker.id, room)}
                                   >
                                     <Trash2 size={14} />
                                   </button>
