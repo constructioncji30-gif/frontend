@@ -10,6 +10,7 @@ import {
   Trash2,
   Check,
   X,
+  EyeClosed,
 } from "lucide-react";
 import * as XLSX from "xlsx";
 
@@ -858,8 +859,8 @@ setLoading(true);    } catch (err) {
                               {worker.name?.toUpperCase()}
                             </div>
                           </td>
-                          <td className="border px-2 py-1">
-                            {worker.iqamaNumber}
+                          <td className="border px-2 py-1 text-green-500">
+                            {/* {worker.iqamaNumber} */}<EyeClosed size={10}/>
                           </td>
                           <td className="border px-2 py-1">
                             {worker.position?.toUpperCase()}
