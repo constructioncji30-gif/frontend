@@ -43,14 +43,14 @@ const Sidebar: React.FC = () => {
           return (
             <Link key={link.href} href={link.href}>
               <div
-                className={`flex text-white items-center mb-2 py-2 px-3 text-xs font-medium rounded-3xl cursor-pointer transition-colors ${
+                className={`flex  flex-col md:flex-row text-white items-center mb-2 py-2 px-3 text-xs font-medium rounded-3xl cursor-pointer transition-colors ${
                   isActive
                     ? "bg-primary text-white"
-                    : "text-gray-600 hover:bg-primary hover:text-white"
+                    : "text-gray-600 hover:bg-primary  hover:text-white"
                 }`}
               >
-                <div className="mr-2 ">{link.icon}</div>
-                <span className="hidden md:inline-block">{link.label}</span>
+                <div className="mr-2 text-xs">{link.icon}</div>
+                <span className="text-[9px] md:inline-block">{link.label}</span>
               </div>
             </Link>
           );
