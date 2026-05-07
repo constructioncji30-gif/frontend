@@ -504,7 +504,7 @@ setLoading(true);    } catch (err) {
 
         <button
           className="flex items-center bg-blue-500 text-white px-3 py-1 rounded-full hover:bg-blue-600"
-          onClick={exportToExcel}
+          // onClick={exportToExcel}
         >
           <Download className="mr-1" size={18} /> Export Excel
         </button>
