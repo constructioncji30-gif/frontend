@@ -25,6 +25,7 @@ interface Worker {
   dateJoined: string;
   leaveDate: string;
   roomNumber: string;
+  MEDICAL:string;
 }
 
 export default function WorkerForm() {
@@ -38,6 +39,7 @@ export default function WorkerForm() {
     dateJoined: "",
     leaveDate: "",
     roomNumber: "",
+    MEDICAL:'NO'
   });
 
   const [rooms, setRooms] = useState<{ id: string; label: string }[]>([]);
@@ -134,6 +136,7 @@ export default function WorkerForm() {
             dateJoined: "",
             leaveDate: "",
             roomNumber: "",
+            MEDICAL:'NO'
           });
         } else {
           // Redirect back to workers list after successful edit

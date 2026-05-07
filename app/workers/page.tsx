@@ -10,6 +10,7 @@ import {
   Trash2,
   Check,
   X,
+  EyeClosed,
 } from "lucide-react";
 import * as XLSX from "xlsx";
 
@@ -842,7 +843,7 @@ export default function WorkerRoomView() {
                             </div>
                           </td>
                           <td className="border px-2 py-1">
-                            {worker.iqamaNumber}
+                            {/* {worker.iqamaNumber} */}<EyeClosed size={12}/>
                           </td>
                           <td className="border px-2 py-1">
                             {worker.position?.toUpperCase()}

@@ -25,6 +25,7 @@ interface Worker {
   dateJoined: string;
   leaveDate: string;
   roomNumber: string;
+   MEDICAL:string;
 }
 
 export default function WorkerForm() {
@@ -41,6 +42,7 @@ export default function WorkerForm() {
     dateJoined: new Date().toISOString().split("T")[0],
     leaveDate: "",
     roomNumber: roomId??'',
+     MEDICAL:'NO'
   });
 
   const [rooms, setRooms] = useState<{ id: string; label: string }[]>([]);
