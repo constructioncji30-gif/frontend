@@ -10,7 +10,6 @@ import {
   Trash2,
   Check,
   X,
-  EyeClosed,
 } from "lucide-react";
 import * as XLSX from "xlsx";
 
@@ -37,6 +36,7 @@ export default function WorkerRoomView() {
     {},
   );
   const [totalSeats, setTotalSeats] = useState<number>(0);
+    const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [roomSearchTerm, setRoomSearchTerm] = useState<string>("");
   const [medicalSearch, setMedicalSearch] = useState<string>("");
@@ -48,6 +48,7 @@ export default function WorkerRoomView() {
 
   // Fetch workers
   const fetchWorkers = async () => {
+    setLoading(false);
     try {
       const res = await fetch("https://camp-kohl.vercel.app/workers-all");
       const data = await res.json();
@@ -58,16 +59,20 @@ export default function WorkerRoomView() {
         const room = worker.roomNumber || "N/A";
         if (!grouped[room]) grouped[room] = [];
         grouped[room].push(worker);
+        
       });
 
       setWorkersByRoom(grouped);
+      setLoading(true);
     } catch (error) {
+      setLoading(true);
       console.error("Error fetching workers:", error);
     }
   };
 
   // Fetch available rooms
   const fetchRooms = async () => {
+    setLoading(false);
     try {
       const res = await fetch("https://camp-kohl.vercel.app/rooms/available-seats");
       const data = await res.json();
@@ -77,7 +82,9 @@ export default function WorkerRoomView() {
         0,
       );
       setTotalSeats(total);
+     
     } catch (error) {
+      
       console.error("Error fetching rooms:", error);
     }
   };
@@ -85,6 +92,7 @@ export default function WorkerRoomView() {
   // Delete worker
   const deleteWorker = async (id: number, roomNumber: string) => {
     if (!confirm("Are you sure you want to delete this worker?")) return;
+    setLoading(false);
 
     try {
       const res = await fetch(`https://camp-kohl.vercel.app/workers/${id}`, {
@@ -99,12 +107,14 @@ export default function WorkerRoomView() {
           const updatedRoom = prev[roomNumber].filter((w) => w.id !== id);
           return { ...prev, [roomNumber]: updatedRoom };
         });
-      } else {
+    setLoading(true);  } else {
         alert(`Error: ${data.error}`);
+        setLoading(true);
       }
     } catch (err) {
       console.error(err);
       alert("Failed to delete worker");
+      setLoading(true);
     }
   };
 
@@ -113,7 +123,7 @@ export default function WorkerRoomView() {
     const newStatus = currentStatus?.toUpperCase() === "YES" ? "NO" : "YES";
     
     if (!confirm(`Are you sure you want to mark this worker as MEDICAL: ${newStatus}?`)) return;
-
+setLoading(false);
     try {
       const res = await fetch(`https://camp-kohl.vercel.app/workers/${id}/medical`, {
         method: "PUT",
@@ -131,9 +141,11 @@ export default function WorkerRoomView() {
       } else {
         alert(`Error: ${data.error}`);
       }
+      setLoading(true);
     } catch (err) {
       console.error(err);
       alert("Failed to update medical status");
+      setLoading(true);
     }
   };
 
@@ -142,7 +154,7 @@ export default function WorkerRoomView() {
     const leaveDate = new Date().toISOString().split("T")[0];
 
     if (!confirm("Are you sure you want to mark this worker as left?")) return;
-
+setLoading(false);
     try {
       const res = await fetch(`https://camp-kohl.vercel.app/workers/${id}/leave`, {
         method: "PUT",
@@ -160,10 +172,10 @@ export default function WorkerRoomView() {
       } else {
         alert(`Error: ${data.error}`);
       }
-    } catch (err) {
+setLoading(true);    } catch (err) {
       console.error(err);
       alert("Failed to mark worker as left");
-    }
+   setLoading(true); }
   };
 
   // Reactivate worker
@@ -472,8 +484,12 @@ export default function WorkerRoomView() {
 
   const formattedDate = new Date().toISOString().slice(0, 10);
 
-  return (
-    <div className="mx-2 mt-2 space-y-6">
+  return !loading ? (
+        <div className="text-center py-12">
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          <p className="mt-2 text-gray-600">Loading please wait...</p>
+        </div> ):
+    (<div className="mx-2 mt-2 space-y-6">
       {/* Header */}
       <div className="flex justify-between items-center bg-gray-100 border-l-4 border-gray-500 p-4 text-lg font-semibold flex-wrap gap-2">
         <span>📅 Date: {formattedDate}</span>
@@ -843,7 +859,7 @@ export default function WorkerRoomView() {
                             </div>
                           </td>
                           <td className="border px-2 py-1">
-                            {/* {worker.iqamaNumber} */}<EyeClosed size={12}/>
+                            {worker.iqamaNumber}
                           </td>
                           <td className="border px-2 py-1">
                             {worker.position?.toUpperCase()}
