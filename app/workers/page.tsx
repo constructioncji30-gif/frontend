@@ -538,7 +538,7 @@ setLoading(true);    } catch (err) {
             )}
           </button>
         ))}
-        <button
+        {/* <button
           onClick={
             showDuplicates
               ? () => setShowDuplicates(false)
@@ -547,7 +547,7 @@ setLoading(true);    } catch (err) {
           className="bg-red-600 text-xs text-white px-2 py-[0.5px] rounded-full hover:bg-red-700"
         >
           Show Duplicate Iqama Workers
-        </button>
+        </button> */}
       </div>
 
       {/* Search Inputs - CORRECTED MEDICAL SEARCH */}
