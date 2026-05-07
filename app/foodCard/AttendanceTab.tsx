@@ -109,7 +109,7 @@ const AttendanceTab = () => {
   const fetchAttendance = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/attendance?date=${selectedDate}&page=${currentPage}&limit=${itemsPerPage}&search=${searchTerm}`);
+      const res = await fetch(`https://camp-kohl.vercel.app/attendance?date=${selectedDate}&page=${currentPage}&limit=${itemsPerPage}&search=${searchTerm}`);
       const data = await res.json();
       
       if (data?.success) {
@@ -136,7 +136,7 @@ const AttendanceTab = () => {
     }
 
     try {
-      const res = await fetch('http://localhost:5000/attendance/initialize', {
+      const res = await fetch('https://camp-kohl.vercel.app/attendance/initialize', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ date: selectedDate })
@@ -164,7 +164,7 @@ const AttendanceTab = () => {
     });
 
     try {
-      const res = await fetch(`http://localhost:5000/attendance/mark`, {
+      const res = await fetch(`https://camp-kohl.vercel.app/attendance/mark`, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -228,7 +228,7 @@ const AttendanceTab = () => {
     }
 
     try {
-      const res = await fetch('http://localhost:5000/attendance/bulk', {
+      const res = await fetch('https://camp-kohl.vercel.app/attendance/bulk', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

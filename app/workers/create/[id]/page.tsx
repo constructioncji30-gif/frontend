@@ -55,7 +55,7 @@ export default function WorkerForm() {
        
 
         // Fetch available rooms for dropdown
-        const roomsRes = await fetch("http://localhost:5000/rooms/available-seats");
+        const roomsRes = await fetch("https://camp-kohl.vercel.app/rooms/available-seats");
         if (roomsRes.ok) {
           const roomsData = await roomsRes.json();
           const dropdownOptions = roomsData.rooms
@@ -99,7 +99,7 @@ export default function WorkerForm() {
     setLoading(true);
     
     const method =   "POST";
-    const url=  "http://localhost:5000/workers";
+    const url=  "https://camp-kohl.vercel.app/workers";
 
     try {
       const res = await fetch(url, {

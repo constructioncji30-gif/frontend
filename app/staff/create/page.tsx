@@ -65,7 +65,7 @@ export default function StaffForm() {
         // Check if we're editing an existing staff
         if (staffId && staffId !== "create") {
           setIsEditing(true);
-          const staffRes = await fetch(`http://localhost:5000/staff/${staffId}`);
+          const staffRes = await fetch(`https://camp-kohl.vercel.app/staff/${staffId}`);
           if (staffRes.ok) {
             const staffData = await staffRes.json();
             setFormData({
@@ -123,8 +123,8 @@ export default function StaffForm() {
     
     const method = isEditing ? "PUT" : "POST";
     const url = isEditing 
-      ? `http://localhost:5000/staff/${staffId}`
-      : "http://localhost:5000/staff";
+      ? `https://camp-kohl.vercel.app/staff/${staffId}`
+      : "https://camp-kohl.vercel.app/staff";
 
     try {
       const res = await fetch(url, {

@@ -67,7 +67,7 @@ export default function StaffForm() {
           setIsEditing(true);
           console.log("Fetching staff data for ID:", staffId);
           
-          const staffRes = await fetch(`http://localhost:5000/staff/${staffId}`);
+          const staffRes = await fetch(`https://camp-kohl.vercel.app/staff/${staffId}`);
           const staffData = await staffRes.json();
           
           console.log("Staff API Response:", staffData);
@@ -134,8 +134,8 @@ export default function StaffForm() {
     
     const method = isEditing ? "PUT" : "POST";
     const url = isEditing 
-      ? `http://localhost:5000/staff/${staffId}`
-      : "http://localhost:5000/staff";
+      ? `https://camp-kohl.vercel.app/staff/${staffId}`
+      : "https://camp-kohl.vercel.app/staff";
 
     try {
       console.log("Saving staff data:", formData);

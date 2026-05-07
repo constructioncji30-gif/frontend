@@ -100,7 +100,7 @@ const FoodCardManagement = () => {
   const fetchAssignedCards = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/food-cards/assigned?page=${currentPage}&limit=${itemsPerPage}&search=${searchTerm}`);
+      const res = await fetch(`https://camp-kohl.vercel.app/food-cards/assigned?page=${currentPage}&limit=${itemsPerPage}&search=${searchTerm}`);
       const data = await res.json();
       
       if (data.success) {
@@ -120,7 +120,7 @@ const FoodCardManagement = () => {
   const fetchAvailableCards = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/food-cards/available?page=${currentPage}&limit=${itemsPerPage}&search=${searchTerm}`);
+      const res = await fetch(`https://camp-kohl.vercel.app/food-cards/available?page=${currentPage}&limit=${itemsPerPage}&search=${searchTerm}`);
       const data = await res.json();
       
       if (data.success) {
@@ -139,7 +139,7 @@ const FoodCardManagement = () => {
   // Fetch statistics
   const fetchStats = async () => {
     try {
-      const res = await fetch("http://localhost:5000/food-cards/summary");
+      const res = await fetch("https://camp-kohl.vercel.app/food-cards/summary");
       const data = await res.json();
       if (data.success && data.summary) {
         setStats(data.summary);
@@ -154,8 +154,8 @@ const FoodCardManagement = () => {
     setWorkersLoading(true);
     try {
       const url = search 
-        ? `http://localhost:5000/workers/for-foodcard-assignment?search=${encodeURIComponent(search)}`
-        : 'http://localhost:5000/workers/for-foodcard-assignment';
+        ? `https://camp-kohl.vercel.app/workers/for-foodcard-assignment?search=${encodeURIComponent(search)}`
+        : 'https://camp-kohl.vercel.app/workers/for-foodcard-assignment';
       
       const res = await fetch(url);
       const data = await res.json();
@@ -259,7 +259,7 @@ const FoodCardManagement = () => {
     }
 
     try {
-      const res = await fetch(`http://localhost:5000/food-cards/${cardNumber}/assign`, {
+      const res = await fetch(`https://camp-kohl.vercel.app/food-cards/${cardNumber}/assign`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
@@ -298,7 +298,7 @@ const FoodCardManagement = () => {
     if (!confirm("Are you sure you want to unassign this card?")) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/food-cards/${cardNumber}/unassign`, {
+      const res = await fetch(`https://camp-kohl.vercel.app/food-cards/${cardNumber}/unassign`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" }
       });
@@ -328,7 +328,7 @@ const FoodCardManagement = () => {
   // Download Excel
   const downloadSimpleExcel = async () => {
     try {
-      const res = await fetch('http://localhost:5000/food-cards/assigned?limit=1000');
+      const res = await fetch('https://camp-kohl.vercel.app/food-cards/assigned?limit=1000');
       const data = await res.json();
       
       if (data.success) {

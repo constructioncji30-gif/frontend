@@ -57,7 +57,7 @@ const  WorkerBarChart = ({ data, title = "Chart", height = 400 }: BarChartProps)
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("http://localhost:5000/dashboard");
+        const res = await fetch("https://camp-kohl.vercel.app/dashboard");
         const data = await res.json();
         setWorkers(data.workers);
         setTotalWorkers(data.workers.length); // Set total workers count

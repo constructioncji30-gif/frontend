@@ -28,7 +28,7 @@ export default function StaffRoomView() {
   // Fetch staff - Updated to fetch all staff including left ones
   const fetchStaff = async () => {
     try {
-      const res = await fetch("http://localhost:5000/staff-all");
+      const res = await fetch("https://camp-kohl.vercel.app/staff-all");
       const data = await res.json();
 
       const grouped: Record<string, Staff[]> = {};
@@ -50,7 +50,7 @@ export default function StaffRoomView() {
     if (!confirm("Are you sure you want to delete this staff member?")) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/staff/${id}`, {
+      const res = await fetch(`https://camp-kohl.vercel.app/staff/${id}`, {
         method: "DELETE",
       });
 
@@ -78,7 +78,7 @@ export default function StaffRoomView() {
     if (!confirm("Are you sure you want to mark this staff as left?")) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/staff/${id}/leave`, {
+      const res = await fetch(`https://camp-kohl.vercel.app/staff/${id}/leave`, {
         method: "PUT",
         headers: {
           'Content-Type': 'application/json',
@@ -106,7 +106,7 @@ export default function StaffRoomView() {
     if (!confirm("Are you sure you want to reactivate this staff member?")) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/staff/${id}/reactivate`, {
+      const res = await fetch(`https://camp-kohl.vercel.app/staff/${id}/reactivate`, {
         method: "PUT",
       });
 

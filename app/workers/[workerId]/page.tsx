@@ -55,7 +55,7 @@ export default function WorkerForm() {
         // Check if we're editing an existing worker
         if (workerId && workerId !== "create") {
           setIsEditing(true);
-          const workerRes = await fetch(`http://localhost:5000/workers/${workerId}`);
+          const workerRes = await fetch(`https://camp-kohl.vercel.app/workers/${workerId}`);
           if (workerRes.ok) {
             const workerData = await workerRes.json();
             setFormData(workerData.worker);
@@ -65,7 +65,7 @@ export default function WorkerForm() {
         }
 
         // Fetch available rooms for dropdown
-        const roomsRes = await fetch("http://localhost:5000/rooms/available-seats");
+        const roomsRes = await fetch("https://camp-kohl.vercel.app/rooms/available-seats");
         if (roomsRes.ok) {
           const roomsData = await roomsRes.json();
           const dropdownOptions = roomsData.rooms
@@ -107,8 +107,8 @@ export default function WorkerForm() {
     
     const method = isEditing ? "PUT" : "POST";
     const url = isEditing 
-      ? `http://localhost:5000/workers/${workerId}`
-      : "http://localhost:5000/workers";
+      ? `https://camp-kohl.vercel.app/workers/${workerId}`
+      : "https://camp-kohl.vercel.app/workers";
 
     try {
       const res = await fetch(url, {
