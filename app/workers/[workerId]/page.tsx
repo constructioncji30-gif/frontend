@@ -163,7 +163,7 @@ export default function WorkerForm() {
         <div className="flex gap-2">
           <Button 
             varient="primary" 
-            onClick={handleSave}
+            // onClick={handleSave}
             disabled={loading}
           >
             {loading ? "Saving..." : "Save"}
