@@ -949,7 +949,7 @@ setLoading(true);    } catch (err) {
                                 <>
                                   <CommonLink
                                     varient="primary"
-                                    href={`/workers`}
+                                    href={`/workers/${worker.id}`}
                                     title="Edit"
                                   />
                                   <button

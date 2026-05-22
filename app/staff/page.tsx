@@ -445,7 +445,10 @@ export default function StaffRoomView() {
                       {filteredStaff.map((staff, index) => (
                         <tr key={staff.id} className="hover:bg-gray-50">
                           <td className="border px-2 py-1 text-center">{index + 1}</td>
-                          <td className="border px-2 py-1 font-medium">{staff.name}</td>
+                          <td className="border px-2 py-1 font-medium">
+                            {/* {staff.name} */}
+NAME {index}
+                          </td>
                           <td className="border px-2 py-1">{staff.designation?.toUpperCase()}</td>
                           <td className="border px-2 py-1">{staff.department || "N/A"}</td>
                           <td className="border px-2 py-1">{staff.phone || "N/A"}</td>
