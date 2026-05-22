@@ -126,29 +126,29 @@ export default function WorkerRoomView() {
     
     if (!confirm(`Are you sure you want to mark this worker as MEDICAL: ${newStatus}?`)) return;
 setLoading(false);
-    try {
-      const res = await fetch(`https://camp-kohl.vercel.app/workers/${id}/medical`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ MEDICAL: newStatus }),
-      });
+    // try {
+      // const res = await fetch(`https://camp-kohl.vercel.app/workers/${id}/medical`, {
+      //   method: "PUT",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ MEDICAL: newStatus }),
+      // });
 
-      const data = await res.json();
+    //   const data = await res.json();
 
-      if (res.ok) {
-        alert(data.message);
-        fetchWorkers(); // Refresh the workers data
-      } else {
-        alert(`Error: ${data.error}`);
-      }
-      setLoading(true);
-    } catch (err) {
-      console.error(err);
-      alert("Failed to update medical status");
-      setLoading(true);
-    }
+    //   if (res.ok) {
+    //     alert(data.message);
+    //     fetchWorkers(); // Refresh the workers data
+    //   } else {
+    //     alert(`Error: ${data.error}`);
+    //   }
+    //   setLoading(true);
+    // } catch (err) {
+    //   console.error(err);
+    //   alert("Failed to update medical status");
+    //   setLoading(true);
+    // }
   };
 
   // Mark worker as left
@@ -877,8 +877,7 @@ setLoading(true);    } catch (err) {
                           </td>
                           <td className="border px-2 py-1">{worker.phone}</td>
                           <td className="border px-2 py-1">
-                            {/* {worker.supplier?.toUpperCase()} */}
-                            COMPANY
+                          COMPANY
                           </td>
                           <td className="border px-2 py-1">
                             {worker.dateJoined ? (
@@ -903,7 +902,7 @@ setLoading(true);    } catch (err) {
                                   ? "bg-green-100 text-green-700 hover:bg-green-200"
                                   : "bg-red-100 text-red-700 hover:bg-red-200"
                               }`}
-                              // onClick={() => toggleMedical(worker.id, worker.MEDICAL)}
+                              onClick={() => toggleMedical(worker.id, worker.MEDICAL)}
                             >
                               {worker.MEDICAL?.toUpperCase() === "YES" ? (
                                 <>
