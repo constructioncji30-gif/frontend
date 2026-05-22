@@ -127,13 +127,13 @@ export default function WorkerRoomView() {
     if (!confirm(`Are you sure you want to mark this worker as MEDICAL: ${newStatus}?`)) return;
 setLoading(false);
     // try {
-      // const res = await fetch(`https://camp-kohl.vercel.app/workers/${id}/medical`, {
-      //   method: "PUT",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ MEDICAL: newStatus }),
-      // });
+    //   const res = await fetch(`https://camp-kohl.vercel.app/workers/${id}/medical`, {
+    //     method: "PUT",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({ MEDICAL: newStatus }),
+    //   });
 
     //   const data = await res.json();
 
@@ -877,7 +877,7 @@ setLoading(true);    } catch (err) {
                           </td>
                           <td className="border px-2 py-1">{worker.phone}</td>
                           <td className="border px-2 py-1">
-                          COMPANY
+                            {/* {worker.supplier?.toUpperCase()} */} COMPANY
                           </td>
                           <td className="border px-2 py-1">
                             {worker.dateJoined ? (
