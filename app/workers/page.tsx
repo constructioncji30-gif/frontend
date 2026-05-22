@@ -877,7 +877,7 @@ setLoading(true);    } catch (err) {
                           </td>
                           <td className="border px-2 py-1">{worker.phone}</td>
                           <td className="border px-2 py-1">
-                            {worker.supplier?.toUpperCase()} COMPANY
+                            {worker.supplier?.toUpperCase()}
                           </td>
                           <td className="border px-2 py-1">
                             {worker.dateJoined ? (
