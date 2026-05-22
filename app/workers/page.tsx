@@ -871,13 +871,14 @@ setLoading(true);    } catch (err) {
                           </td>
                           <td className="border px-2 py-1 text-green-500">
                             {PASSWORD==2344?worker.iqamaNumber :<EyeClosed size={10}/>} 
-                          </td>
+                          </td>l
                           <td className="border px-2 py-1">
                             {worker.position?.toUpperCase()}
                           </td>
                           <td className="border px-2 py-1">{worker.phone}</td>
                           <td className="border px-2 py-1">
-                            {worker.supplier?.toUpperCase()}
+                            {/* {worker.supplier?.toUpperCase()} */}
+                            COMPANY
                           </td>
                           <td className="border px-2 py-1">
                             {worker.dateJoined ? (
@@ -902,7 +903,7 @@ setLoading(true);    } catch (err) {
                                   ? "bg-green-100 text-green-700 hover:bg-green-200"
                                   : "bg-red-100 text-red-700 hover:bg-red-200"
                               }`}
-                              onClick={() => toggleMedical(worker.id, worker.MEDICAL)}
+                              // onClick={() => toggleMedical(worker.id, worker.MEDICAL)}
                             >
                               {worker.MEDICAL?.toUpperCase() === "YES" ? (
                                 <>
@@ -948,7 +949,7 @@ setLoading(true);    } catch (err) {
                                 <>
                                   <CommonLink
                                     varient="primary"
-                                    href={`/workers/${worker.id}`}
+                                    href={`/workers`}
                                     title="Edit"
                                   />
                                   <button

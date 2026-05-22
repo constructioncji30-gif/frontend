@@ -13,7 +13,7 @@ const Logo: React.FC = () => {
 
       {/* Text */}
       <div className="flex items-center text-xl font-bold">
-        <span className="text-black">CJI</span>
+        <span className="text-black">NAME</span>
         {/* <span className="text-purple-600 ml-1">Timely</span> */}
       </div>
     </div>
