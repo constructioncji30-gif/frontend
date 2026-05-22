@@ -10,6 +10,7 @@ import {
   Trash2,
   Check,
   X,
+  EyeClosed,
 } from "lucide-react";
 import * as XLSX from "xlsx";
 
@@ -40,7 +41,7 @@ export default function WorkerRoomView() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [roomSearchTerm, setRoomSearchTerm] = useState<string>("");
   const [medicalSearch, setMedicalSearch] = useState<string>("");
-  const [PASSWORD, setPASSWORD] = useState<string>("");
+    const [PASSWORD, setPASSWORD] = useState<any>("");
 
   // Tab state
   const [activeTab, setActiveTab] = useState<
@@ -125,29 +126,29 @@ export default function WorkerRoomView() {
     
     if (!confirm(`Are you sure you want to mark this worker as MEDICAL: ${newStatus}?`)) return;
 setLoading(false);
-    try {
-      const res = await fetch(`https://camp-kohl.vercel.app/workers/${id}/medical`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ MEDICAL: newStatus }),
-      });
+    // try {
+    //   const res = await fetch(`https://camp-kohl.vercel.app/workers/${id}/medical`, {
+    //     method: "PUT",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({ MEDICAL: newStatus }),
+    //   });
 
-      const data = await res.json();
+    //   const data = await res.json();
 
-      if (res.ok) {
-        alert(data.message);
-        fetchWorkers(); // Refresh the workers data
-      } else {
-        alert(`Error: ${data.error}`);
-      }
-      setLoading(true);
-    } catch (err) {
-      console.error(err);
-      alert("Failed to update medical status");
-      setLoading(true);
-    }
+    //   if (res.ok) {
+    //     alert(data.message);
+    //     fetchWorkers(); // Refresh the workers data
+    //   } else {
+    //     alert(`Error: ${data.error}`);
+    //   }
+    //   setLoading(true);
+    // } catch (err) {
+    //   console.error(err);
+    //   alert("Failed to update medical status");
+    //   setLoading(true);
+    // }
   };
 
   // Mark worker as left
@@ -490,7 +491,7 @@ setLoading(true);    } catch (err) {
           <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
           <p className="mt-2 text-gray-600">Loading please wait...</p>
         </div> ):
-    (<div className="mx-2 mt-2 space-y-6 h-[100vh]">
+    (<div className="mx-2 mt-2 space-y-6">
       {/* Header */}
       <div className="flex justify-between items-center bg-gray-100 border-l-4 border-gray-500 p-4 text-lg font-semibold flex-wrap gap-2">
         <span>📅 Date: {formattedDate}</span>
@@ -504,7 +505,7 @@ setLoading(true);    } catch (err) {
 
         <button
           className="flex items-center bg-blue-500 text-white px-3 py-1 rounded-full hover:bg-blue-600"
-          onClick={exportToExcel}
+          // onClick={exportToExcel}
         >
           <Download className="mr-1" size={18} /> Export Excel
         </button>
@@ -538,7 +539,7 @@ setLoading(true);    } catch (err) {
             )}
           </button>
         ))}
-        <button
+        {/* <button
           onClick={
             showDuplicates
               ? () => setShowDuplicates(false)
@@ -547,7 +548,7 @@ setLoading(true);    } catch (err) {
           className="bg-red-600 text-xs text-white px-2 py-[0.5px] rounded-full hover:bg-red-700"
         >
           Show Duplicate Iqama Workers
-        </button>
+        </button> */}
       </div>
 
       {/* Search Inputs - CORRECTED MEDICAL SEARCH */}
@@ -556,7 +557,6 @@ setLoading(true);    } catch (err) {
         <div className="flex flex-col">
           <label className="block text-sm font-medium mb-1">Filter by Medical</label>
           <div className="flex gap-4 border rounded-full px-4 py-2 bg-white">
-            
             <label className="flex items-center gap-2 cursor-pointer">
               <input
                 type="radio"
@@ -594,16 +594,6 @@ setLoading(true);    } catch (err) {
         </div>
 
         {/* Search by Name or Iqama */}
-         <div className="flex flex-col">
-          <label className="block text-sm font-medium mb-1">PASSWORD</label>
-          <input
-            type="text"
-            placeholder="ENTER PASSWORD TO SEE"
-            className="border px-3 py-2 rounded-full w-64 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={PASSWORD}
-            onChange={(e) => setPASSWORD(e.target.value)}
-          />
-        </div>
         <div className="flex flex-col">
           <label className="block text-sm font-medium mb-1">Search by Name or Iqama</label>
           <input
@@ -614,7 +604,16 @@ setLoading(true);    } catch (err) {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-
+ <div className="flex flex-col">
+          <label className="block text-sm font-medium mb-1">PASSWORD</label>
+          <input
+            type="text"
+            placeholder="ENTER PASSWORD TO SEE"
+            className="border px-3 py-2 rounded-full w-64 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={PASSWORD}
+            onChange={(e) => setPASSWORD(e.target.value)}
+          />
+        </div>
         {/* Search by Room */}
         <div className="flex flex-col">
           <label className="block text-sm font-medium mb-1">Search by Room</label>
@@ -722,7 +721,7 @@ setLoading(true);    } catch (err) {
         )}
 
       {/* Room Tables */}
-      <div className="overflow-auto max-h-screen">
+      <div className="overflow-auto max-h-[590px]">
         {Object.keys(filteredWorkersByRoom).length === 0 ? (
           <div className="text-center py-8 text-gray-500">
             {activeTab === "LEFT"
@@ -870,15 +869,15 @@ setLoading(true);    } catch (err) {
                               {worker.name?.toUpperCase()}
                             </div>
                           </td>
-                          <td className="border px-2 py-1">
-                            {worker.iqamaNumber}
-                          </td>
+                          <td className="border px-2 py-1 text-green-500">
+                            {PASSWORD==2344?worker.iqamaNumber :<EyeClosed size={10}/>} 
+                          </td>l
                           <td className="border px-2 py-1">
                             {worker.position?.toUpperCase()}
                           </td>
                           <td className="border px-2 py-1">{worker.phone}</td>
                           <td className="border px-2 py-1">
-                            {worker.supplier?.toUpperCase()}
+                            {/* {worker.supplier?.toUpperCase()} */} COMPANY
                           </td>
                           <td className="border px-2 py-1">
                             {worker.dateJoined ? (
@@ -932,15 +931,15 @@ setLoading(true);    } catch (err) {
                                   />
                                   <button
                                     className="bg-green-500 text-white px-2 py-[1px] rounded-full hover:bg-green-600 text-xs"
-                                    onClick={() =>
-                                      reactivateWorker(worker.id, room)
-                                    }
+                                    // onClick={() =>
+                                    //   reactivateWorker(worker.id, room)
+                                    // }
                                   >
                                     Reactivate
                                   </button>
                                   <button
                                     className="bg-red-500 text-white px-2 py-[1px] rounded-full hover:bg-red-600"
-                                    onClick={() => deleteWorker(worker.id, room)}
+                                    // onClick={() => deleteWorker(worker.id, room)}
                                   >
                                     <Trash2 size={14} />
                                   </button>
@@ -954,13 +953,13 @@ setLoading(true);    } catch (err) {
                                   />
                                   <button
                                     className="bg-orange-500 text-white px-2 py-[1px] rounded-full hover:bg-orange-600 text-xs"
-                                    onClick={() => markAsLeft(worker.id, room)}
+                                    // onClick={() => markAsLeft(worker.id, room)}
                                   >
                                     Mark as Left
                                   </button>
                                   <button
                                     className="bg-red-500 text-white px-2 py-[1px] rounded-full hover:bg-red-600"
-                                    onClick={() => deleteWorker(worker.id, room)}
+                                    // onClick={() => deleteWorker(worker.id, room)}
                                   >
                                     <Trash2 size={14} />
                                   </button>
