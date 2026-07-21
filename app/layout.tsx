@@ -5,6 +5,7 @@ import Header from "./component/Header";
 import Sidebar from "./component/Sidebar";
 import { redirect } from "next/navigation";
 import { ReduxProvider } from "./ReduxProvider";
+import { Analytics } from '@vercel/analytics/next';
  
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -44,6 +45,7 @@ export default function RootLayout({
             </main>
           </div>
         </div></ReduxProvider>
+        <Analytics />
       </body>
     </html>
   );
