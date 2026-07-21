@@ -20,11 +20,11 @@ const links = [
   
   { href: "/staff", label: "Staff", icon: <Users className="w-5 h-5" /> },
   { href: "/workers", label: "Workers", icon: <Users className="w-5 h-5" /> },
-    {
-    href: "/inventry",
-    label: "inventry Management System",
-    icon: <Settings className="w-5 h-5" />,
-  },
+  //   {
+  //   href: "/inventry",
+  //   label: "inventry Management System",
+  //   icon: <Settings className="w-5 h-5" />,
+  // },
   {
     href: "/foodCard",
     label: "Food Card Details",
