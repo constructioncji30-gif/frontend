@@ -35,12 +35,20 @@ interface PieChartsProps {
   workers?: DashboardCount[];
   title?: string;
   height?: number;
+  groupBy?: 'position' | 'supplier' | 'roomNumber';
+  showButtons?: boolean;
 }
 
-const PieCharts = ({ title = "Distribution", height = 275 }: PieChartsProps) => {
+const PieCharts = ({ 
+  title = "Distribution", 
+  height = 275,
+  groupBy: initialGroupBy = 'position',
+  showButtons = true
+}: PieChartsProps) => {
   const [workers, setWorkers] = useState<DashboardCount[]>([]);
   const [loading, setLoading] = useState(true);
   const [totalWorkers, setTotalWorkers] = useState<number>(0);
+  const [groupBy, setGroupBy] = useState<'position' | 'supplier' | 'roomNumber'>(initialGroupBy);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,9 +60,18 @@ const PieCharts = ({ title = "Distribution", height = 275 }: PieChartsProps) => 
         if (Array.isArray(data)) {
           setTotalWorkers(data.length);
           
-          // Group workers by position
+          // Group workers by the selected field
           const counts = data.reduce((acc: Record<string, number>, worker: Worker) => {
-            const key = worker.position || 'Unknown';
+            let key: string;
+            if (groupBy === 'position') {
+              key = worker.position || 'Unknown';
+            } else if (groupBy === 'supplier') {
+              key = worker.supplier || 'Unknown';
+            } else if (groupBy === 'roomNumber') {
+              key = worker.roomNumber || 'Unknown';
+            } else {
+              key = 'Unknown';
+            }
             acc[key] = (acc[key] || 0) + 1;
             return acc;
           }, {});
@@ -70,7 +87,16 @@ const PieCharts = ({ title = "Distribution", height = 275 }: PieChartsProps) => 
           setTotalWorkers(data.workers.length);
           
           const counts = data.workers.reduce((acc: Record<string, number>, worker: Worker) => {
-            const key = worker.position || 'Unknown';
+            let key: string;
+            if (groupBy === 'position') {
+              key = worker.position || 'Unknown';
+            } else if (groupBy === 'supplier') {
+              key = worker.supplier || 'Unknown';
+            } else if (groupBy === 'roomNumber') {
+              key = worker.roomNumber || 'Unknown';
+            } else {
+              key = 'Unknown';
+            }
             acc[key] = (acc[key] || 0) + 1;
             return acc;
           }, {});
@@ -89,7 +115,7 @@ const PieCharts = ({ title = "Distribution", height = 275 }: PieChartsProps) => 
       }
     };
     fetchData();
-  }, []);
+  }, [groupBy]);
 
   // Calculate total for percentages
   const total = workers.reduce((sum, item) => sum + item.count, 0);
@@ -153,6 +179,17 @@ const PieCharts = ({ title = "Distribution", height = 275 }: PieChartsProps) => 
     },
   };
 
+  const getGroupLabel = () => {
+    if (groupBy === 'position') return 'Positions';
+    if (groupBy === 'supplier') return 'Suppliers';
+    if (groupBy === 'roomNumber') return 'Rooms';
+    return 'Categories';
+  };
+
+  const handleGroupChange = (type: 'position' | 'supplier' | 'roomNumber') => {
+    setGroupBy(type);
+  };
+
   if (loading) {
     return (
       <div className="bg-white p-4 rounded-lg shadow-md">
@@ -181,6 +218,42 @@ const PieCharts = ({ title = "Distribution", height = 275 }: PieChartsProps) => 
         </h3>
       )}
       
+      {/* Group Buttons */}
+      {showButtons && (
+        <div className="flex justify-center gap-2 mb-4">
+          <button
+            onClick={() => handleGroupChange('position')}
+            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+              groupBy === 'position'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
+          >
+            By Position
+          </button>
+          <button
+            onClick={() => handleGroupChange('supplier')}
+            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+              groupBy === 'supplier'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
+          >
+            By Supplier
+          </button>
+          <button
+            onClick={() => handleGroupChange('roomNumber')}
+            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+              groupBy === 'roomNumber'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
+          >
+            By Room
+          </button>
+        </div>
+      )}
+
       {/* Summary Stats */}
       <div className="mb-3 text-center">
         <div className="inline-flex items-center bg-blue-50 px-3 py-1 rounded-full">
@@ -198,7 +271,7 @@ const PieCharts = ({ title = "Distribution", height = 275 }: PieChartsProps) => 
       {workers.length > 0 && (
         <div className="mt-3 text-xs text-gray-600 text-center">
           <span>
-            Positions: <strong>{workers.length}</strong>
+            {getGroupLabel()}: <strong>{workers.length}</strong>
             {workers.length > 0 && (
               <>
                 {" "}• Largest: <strong>{Math.max(...workers.map(d => d.count))}</strong>
