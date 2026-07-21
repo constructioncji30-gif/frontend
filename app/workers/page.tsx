@@ -871,14 +871,14 @@ setLoading(true);    } catch (err) {
                             </div>
                           </td>
                           <td className="border px-2 py-1">
-                            {index}234567
+                            {index}2345673
                           </td>
                           <td className="border px-2 py-1">
                             {worker.position?.toUpperCase()}
                           </td>
                           <td className="border px-2 py-1">{worker.phone}</td>
                           <td className="border px-2 py-1">
-                            {/* {worker.supplier?.toUpperCase()} */} COMPANY
+                            {worker.supplier?.toUpperCase()} 
                           </td>
                           <td className="border px-2 py-1">
                             {worker.dateJoined ? (
