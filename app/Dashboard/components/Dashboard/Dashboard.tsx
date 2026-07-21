@@ -70,9 +70,9 @@ const Dashboard = () => {
           <BarChart data={dashboardCounts} />
         </CommonCard>
 
-        <CommonCard title="Work Detail Distribution">
+        {/* <CommonCard title="Work Detail Distribution">
           <PieCharts data={dashboardCounts} />
-        </CommonCard>
+        </CommonCard> */}
 
         {/* <CommonCard title="Worker Leaderboard">
           <div className="flex gap-2 mb-4">
