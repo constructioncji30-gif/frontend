@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} text-black ${geistMono.variable} antialiased`}
       >
        <ReduxProvider>   <div className="flex flex-col bg-white h-screen overflow-hidden ">
           <Header />
